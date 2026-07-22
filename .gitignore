@@ -37,3 +37,25 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+# IntelliJ
+.idea/
+
+# Maven
+target/
+
+# Logs
+logs/
+
+*.log
+
+# Allure
+allure-results/
+allure-report/
+
+# Screenshots
+screenshots/*.png
+
+# Reports
+test-output/
+extent-report/
