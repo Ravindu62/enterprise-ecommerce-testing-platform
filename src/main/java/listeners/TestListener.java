@@ -10,7 +10,7 @@ import utils.ScreenshotUtils;
 public class TestListener implements ITestListener {
 
     private static final Logger logger =
-            LoggerUtils.getLogger(AnnotationTransformer.TestListener.class);
+            LoggerUtils.getLogger(TestListener.class);
 
     @Override
     public void onStart(ITestContext context) {
