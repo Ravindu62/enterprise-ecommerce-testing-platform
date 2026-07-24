@@ -89,10 +89,16 @@ public class DriverFactory {
 
 
 
-        DriverManager.getDriver()
-                .manage()
-                .window()
-                .maximize();
+        if(Boolean.parseBoolean(
+                ConfigReader.getProperty("maximize")
+        )){
+
+            DriverManager.getDriver()
+                    .manage()
+                    .window()
+                    .maximize();
+
+        }
 
 
 
