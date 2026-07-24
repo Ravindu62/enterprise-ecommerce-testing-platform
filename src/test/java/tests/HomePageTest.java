@@ -5,6 +5,8 @@ import base.BaseTest;
 import driver.DriverManager;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.catalog.HomePage;
+import pages.components.HeaderComponent;
 
 
 public class HomePageTest extends BaseTest {
@@ -28,6 +30,19 @@ public class HomePageTest extends BaseTest {
 
         Assert.assertNotNull(title);
 
+
+    }
+
+    @Test
+    public void verifyHomePageLoads() {
+
+        HomePage homePage = new HomePage();
+
+        HeaderComponent header = new HeaderComponent();
+
+        Assert.assertTrue(homePage.isHomePageLoaded());
+
+        Assert.assertTrue(header.isLogoDisplayed());
 
     }
 
