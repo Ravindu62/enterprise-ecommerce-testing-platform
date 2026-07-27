@@ -5,23 +5,37 @@ import pages.BasePage;
 
 public class HeaderComponent extends BasePage {
 
-    private final By logo =
-            By.cssSelector("img.logo");
+    // ==========================================================
+    // Locators (Replace with actual Maho Commerce locators)
+    // ==========================================================
 
-    private final By searchTextbox =
-            By.id("search");
+    private final By logo = By.cssSelector("img[src='https://demo.mahocommerce.com/skin/frontend/base/default/images/logo.svg']");
 
-    private final By searchButton =
-            By.cssSelector("button.search");
+    private final By homeLogo = By.cssSelector(".navbar-brand");
 
-    private final By accountButton =
-            By.cssSelector(".account");
+    private final By searchTextbox = By.id("search");
 
-    private final By wishlistButton =
-            By.cssSelector(".wishlist");
+    private final By searchButton = By.id("search-button");
 
-    private final By cartButton =
-            By.cssSelector(".cart");
+    private final By myAccountButton = By.id("my-account");
+
+    private final By loginLink = By.linkText("Login");
+
+    private final By registerLink = By.linkText("Register");
+
+    private final By wishlistButton = By.id("wishlist");
+
+    private final By shoppingCartButton = By.id("shopping-cart");
+
+    private final By checkoutButton = By.id("checkout");
+
+    private final By currencyDropdown = By.id("currency");
+
+    private final By languageDropdown = By.id("language");
+
+    // ==========================================================
+    // Logo
+    // ==========================================================
 
     public boolean isLogoDisplayed() {
 
@@ -29,19 +43,61 @@ public class HeaderComponent extends BasePage {
 
     }
 
-    public void search(String keyword) {
+    public void clickLogo() {
+
+        click(homeLogo);
+
+    }
+
+    // ==========================================================
+    // Search
+    // ==========================================================
+
+    public void enterSearchKeyword(String keyword) {
 
         sendKeys(searchTextbox, keyword);
+
+    }
+
+    public void clickSearchButton() {
 
         click(searchButton);
 
     }
 
-    public void openMyAccount() {
+    public void searchProduct(String keyword) {
 
-        click(accountButton);
+        enterSearchKeyword(keyword);
+
+        clickSearchButton();
 
     }
+
+    // ==========================================================
+    // My Account
+    // ==========================================================
+
+    public void openMyAccount() {
+
+        click(myAccountButton);
+
+    }
+
+    public void clickLogin() {
+
+        click(loginLink);
+
+    }
+
+    public void clickRegister() {
+
+        click(registerLink);
+
+    }
+
+    // ==========================================================
+    // Wishlist
+    // ==========================================================
 
     public void openWishlist() {
 
@@ -49,9 +105,77 @@ public class HeaderComponent extends BasePage {
 
     }
 
-    public void openCart() {
+    // ==========================================================
+    // Shopping Cart
+    // ==========================================================
 
-        click(cartButton);
+    public void openShoppingCart() {
+
+        click(shoppingCartButton);
+
+    }
+
+    // ==========================================================
+    // Checkout
+    // ==========================================================
+
+    public void openCheckout() {
+
+        click(checkoutButton);
+
+    }
+
+    // ==========================================================
+    // Currency
+    // ==========================================================
+
+    public void changeCurrency(String currency) {
+
+        selectDropdownByVisibleText(
+                currencyDropdown,
+                currency
+        );
+
+    }
+
+    // ==========================================================
+    // Language
+    // ==========================================================
+
+    public void changeLanguage(String language) {
+
+        selectDropdownByVisibleText(
+                languageDropdown,
+                language
+        );
+
+    }
+
+    // ==========================================================
+    // Validations
+    // ==========================================================
+
+    public boolean isSearchBoxDisplayed() {
+
+        return isDisplayed(searchTextbox);
+
+    }
+
+    public boolean isMyAccountDisplayed() {
+
+        return isDisplayed(myAccountButton);
+
+    }
+
+    public boolean isWishlistDisplayed() {
+
+        return isDisplayed(wishlistButton);
+
+    }
+
+    public boolean isShoppingCartDisplayed() {
+
+        return isDisplayed(shoppingCartButton);
 
     }
 
