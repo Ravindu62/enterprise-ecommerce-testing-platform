@@ -1,4 +1,4 @@
-package tests.smoke;
+package tests.catalog;
 
 import base.BaseTest;
 import driver.DriverManager;
@@ -28,7 +28,8 @@ public class HomePageTest extends BaseTest {
 
     @Test(
             priority = 1,
-            description = "TC-HOME-001 - Verify homepage loads successfully"
+            description = "TC-HOME-001 - Verify homepage loads successfully",
+            groups = {"smoke", "regression"}
     )
     public void verifyHomepageLoadsSuccessfully() {
 
