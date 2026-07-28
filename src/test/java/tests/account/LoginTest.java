@@ -2,6 +2,8 @@ package tests.account;
 
 import base.BaseTest;
 import driver.DriverManager;
+import factories.UserFactory;
+import models.User;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -28,10 +30,9 @@ public class LoginTest extends BaseTest {
     )
     public void verifyValidLogin() {
 
-        loginPage.login(
-                "ravindu@gmail.com",
-                "Ravindu@2001"
-        );
+        User user = UserFactory.createExistingUser();
+
+        loginPage.login(user);
 
         Assert.assertTrue(
                 loginPage.isDashboardDisplayed(),
@@ -46,10 +47,9 @@ public class LoginTest extends BaseTest {
     )
     public void verifyInvalidPassword() {
 
-        loginPage.login(
-                "ravindu@gmail.com",
-                "Invalid123"
-        );
+        User user = UserFactory.createPasswordMismatchUser();
+
+        loginPage.login(user);
 
         Assert.assertTrue(
                 loginPage.isLoginErrorDisplayed(),
@@ -64,10 +64,9 @@ public class LoginTest extends BaseTest {
     )
     public void verifyInvalidEmail() {
 
-        loginPage.login(
-                "invalid@test.com",
-                "Ravindu@2001"
-        );
+        User user = UserFactory.createInvalidEmail();
+
+        loginPage.login(user);
 
         Assert.assertTrue(
                 loginPage.isLoginErrorDisplayed()
@@ -81,9 +80,9 @@ public class LoginTest extends BaseTest {
     )
     public void verifyEmptyEmail() {
 
-        loginPage.enterPassword("Test@1234");
+        User user = UserFactory.emptyEmailUser();
 
-        loginPage.clickSignIn();
+        loginPage.login(user);
 
         Assert.assertTrue(
                 loginPage.isEmailValidationDisplayed()
@@ -97,13 +96,12 @@ public class LoginTest extends BaseTest {
     )
     public void verifyEmptyPassword() {
 
-        loginPage.enterEmail("ravindu@gmail.com");
+        User user = UserFactory.emptyPasswordUser();
 
-        loginPage.clickSignIn();
+        loginPage.login(user);
 
-        Assert.assertTrue(
-                loginPage.isPasswordValidationDisplayed()
-        );
+        Assert.assertTrue(loginPage.isRequiredAlertMessageDisplayed());
+
 
     }
 
@@ -113,7 +111,9 @@ public class LoginTest extends BaseTest {
     )
     public void verifyEmptyCredentials() {
 
-        loginPage.clickSignIn();
+        User user = UserFactory.createEmptyUser();
+
+        loginPage.login(user);
 
         Assert.assertTrue(loginPage.isEmailValidationDisplayed());
 

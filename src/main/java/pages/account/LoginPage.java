@@ -1,5 +1,6 @@
 package pages.account;
 
+import models.User;
 import org.openqa.selenium.By;
 import pages.BasePage;
 
@@ -38,7 +39,7 @@ public class LoginPage extends BasePage {
             By.id("advice-required-entry-pass");
 
     private final By requiredAlertMessage =
-            By.cssSelector("error-msg");
+            By.cssSelector(".error-msg");
 
     private final By forgotPasswordDialogBox =
             By.id("forgot-password-dialog");
@@ -67,11 +68,11 @@ public class LoginPage extends BasePage {
 
     }
 
-    public void login(String email, String password) {
+    public void login(User user) {
 
-        enterEmail(email);
+        enterEmail(user.getEmail());
 
-        enterPassword(password);
+        enterPassword(user.getPassword());
 
         clickSignIn();
 
@@ -125,4 +126,7 @@ public class LoginPage extends BasePage {
         return isDisplayed(registerButton);
     }
 
+    public boolean isRequiredAlertMessageDisplayed() {
+        return isDisplayed(requiredAlertMessage);
+    }
 }

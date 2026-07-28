@@ -2,6 +2,7 @@ package pages.account;
 
 import org.openqa.selenium.By;
 import pages.BasePage;
+import models.User;
 
 public class RegisterPage extends BasePage {
 
@@ -149,25 +150,19 @@ public class RegisterPage extends BasePage {
 
 
 
-    public void registerUser(
-            String firstName,
-            String middleName,
-            String lastName,
-            String email,
-            String password
-    ){
+    public void registerUser(User user){
 
-        enterFirstName(firstName);
+        enterFirstName(user.getFirstName());
 
-        enterMiddleName(middleName);
+        enterMiddleName(user.getMiddleName());
 
-        enterLastName(lastName);
+        enterLastName(user.getLastName());
 
-        enterEmail(email);
+        enterEmail(user.getEmail());
 
-        enterPassword(password);
+        enterPassword(user.getPassword());
 
-        enterConfirmPassword(password);
+        enterConfirmPassword(user.getConfirmPassword());
 
         clickCreateAccount();
 

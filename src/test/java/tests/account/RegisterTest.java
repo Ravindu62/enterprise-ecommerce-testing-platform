@@ -2,10 +2,12 @@ package tests.account;
 
 
 import base.BaseTest;
+import models.User;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.account.RegisterPage;
 import driver.DriverManager;
+import factories.UserFactory;
 
 
 public class RegisterTest extends BaseTest {
@@ -38,14 +40,9 @@ public class RegisterTest extends BaseTest {
         openRegistrationPage();
 
 
-        registerPage.registerUser(
-                "Chandima",
-                "Pasan",
-                "Nanayakkara",
-                "chandima@gmail.com",
-                "Chandima@2001"
-        );
+        User user = UserFactory.createValidUser();
 
+        registerPage.registerUser(user);
 
         Assert.assertTrue(
                 registerPage.isAccountCreated(),
@@ -66,23 +63,9 @@ public class RegisterTest extends BaseTest {
 
         openRegistrationPage();
 
+        User user = UserFactory.withoutFirstName();
 
-        registerPage.enterLastName("Doe");
-
-        registerPage.enterEmail(
-                "john@test.com"
-        );
-
-        registerPage.enterPassword(
-                "Test@1234"
-        );
-
-        registerPage.enterConfirmPassword(
-                "Test@1234"
-        );
-
-
-        registerPage.clickCreateAccount();
+        registerPage.registerUser(user);
 
 
         Assert.assertTrue(
@@ -104,25 +87,9 @@ public class RegisterTest extends BaseTest {
 
         openRegistrationPage();
 
+        User user = UserFactory.withoutLastName();
 
-        registerPage.enterFirstName(
-                "John"
-        );
-
-        registerPage.enterEmail(
-                "john@test.com"
-        );
-
-        registerPage.enterPassword(
-                "Test@1234"
-        );
-
-        registerPage.enterConfirmPassword(
-                "Test@1234"
-        );
-
-
-        registerPage.clickCreateAccount();
+        registerPage.registerUser(user);
 
 
         Assert.assertTrue(
@@ -144,14 +111,9 @@ public class RegisterTest extends BaseTest {
 
         openRegistrationPage();
 
+        User user = UserFactory.createExistingUser();
 
-        registerPage.registerUser(
-                "Existing",
-                "User",
-                "Maho",
-                "test@gmail.com",
-                "Test@1234"
-        );
+        registerPage.registerUser(user);
 
 
         Assert.assertTrue(
@@ -175,13 +137,9 @@ public class RegisterTest extends BaseTest {
         openRegistrationPage();
 
 
-        registerPage.registerUser(
-                "John",
-                "Doe",
-                "User",
-                "invalid-email",
-                "Test@1234"
-        );
+        User user = UserFactory.createInvalidEmailUser();
+
+        registerPage.registerUser(user);
 
 
         Assert.assertTrue(
@@ -204,30 +162,9 @@ public class RegisterTest extends BaseTest {
 
         openRegistrationPage();
 
+        User user = UserFactory.createWeakPasswordUser();
 
-        registerPage.enterFirstName(
-                "John"
-        );
-
-        registerPage.enterLastName(
-                "Doe"
-        );
-
-        registerPage.enterEmail(
-                "john@test.com"
-        );
-
-        registerPage.enterPassword(
-                "123"
-        );
-
-        registerPage.enterConfirmPassword(
-                "123"
-        );
-
-
-        registerPage.clickCreateAccount();
-
+        registerPage.registerUser(user);
 
         Assert.assertTrue(
                 registerPage.isPasswordErrorDisplayed(),
@@ -251,28 +188,9 @@ public class RegisterTest extends BaseTest {
         openRegistrationPage();
 
 
-        registerPage.enterFirstName(
-                "John"
-        );
+        User user = UserFactory.createPasswordMismatchUser();
 
-        registerPage.enterLastName(
-                "Doe"
-        );
-
-        registerPage.enterEmail(
-                "john@test.com"
-        );
-
-        registerPage.enterPassword(
-                "Test@1234"
-        );
-
-        registerPage.enterConfirmPassword(
-                "Test@5678"
-        );
-
-
-        registerPage.clickCreateAccount();
+        registerPage.registerUser(user);
 
 
         Assert.assertTrue(
@@ -297,7 +215,9 @@ public class RegisterTest extends BaseTest {
         openRegistrationPage();
 
 
-        registerPage.clickCreateAccount();
+        User user = UserFactory.createEmptyUser();
+
+        registerPage.registerUser(user);
 
 
         Assert.assertTrue(
@@ -335,15 +255,9 @@ public class RegisterTest extends BaseTest {
         openRegistrationPage();
 
 
-        registerPage.registerUser(
-                "Automation",
-                "Tester",
-                "Maho",
-                "automation"
-                        + System.currentTimeMillis()
-                        + "@test.com",
-                "Test@1234"
-        );
+        User user = UserFactory.createValidUser();
+
+        registerPage.registerUser(user);
 
 
         Assert.assertTrue(
